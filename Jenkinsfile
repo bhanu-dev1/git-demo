@@ -2,23 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Code checked out'
-            }
-        }
-
         stage('Build') {
-            steps {
-                echo 'Building application'
-                sh 'ls -l'
-            }
-        }
-
-        stage('Docker Build') {
             steps {
                 sh 'docker build -t git-demo:1.0 .'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                docker stop git-demo-app || true
+                docker rm git-demo-app || true
+                docker run -d --name git-demo-app git-demo:1.0
+                '''
+            }
+        }
     }
 }
+
