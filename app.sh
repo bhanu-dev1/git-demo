@@ -1,3 +1,6 @@
 #!/bin/bash
-echo "Hello DevOps from Ubuntu EC2"
-echo "Login feature added"
+while true
+do
+  echo "App running at $(date)"
+  sleep 10
+done
