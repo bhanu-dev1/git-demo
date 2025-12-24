@@ -10,14 +10,14 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Build stage running'
+                echo 'Building application'
                 sh 'ls -l'
             }
         }
 
-        stage('Test') {
+        stage('Docker Build') {
             steps {
-                echo 'Test stage running'
+                sh 'docker build -t git-demo:1.0 .'
             }
         }
     }
